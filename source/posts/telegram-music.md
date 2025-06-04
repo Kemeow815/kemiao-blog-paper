@@ -40,7 +40,26 @@ keywords: Telegram, Music, 音乐播放器
 
 ### [（我是范例-点我查看）](https://t.me/TESTLIVEUP)
 
-<div style="text-align:center; font-weight:bold; text-decoration:underline;">须知</div>
+// 完整示例
+function Notice() {
+  return (
+    <div style={{
+      border: '1px solid #eee', // 仅用于演示容器边界
+      padding: 20
+    }}>
+      <div style={{
+        textAlign: 'center',
+        textDecoration: 'underline',
+        fontWeight: 'bold',
+        fontSize: '24px',      // 可选字号
+        color: '#333',         // 可选颜色
+        padding: '10px 0'      // 可选内边距
+      }}>
+        须知
+      </div>
+    </div>
+  );
+}
 
 > 使用：“.FLAC“格式的音乐文件，有时候不能正常显示歌词时间轴，是正常的，所以你可能要转换特定的格式，如.mp3，或是.ogg 或.m4a 的歌曲。
 
@@ -56,14 +75,19 @@ keywords: Telegram, Music, 音乐播放器
 
 　　以上是原文内容，如果你改了音乐格式失去了原本的封面，歌手等等东西，一般来说是不妨碍什么的，如果你一定要改的话，可以使用[音乐标签](https://t.me/kemiaosw_me/394)。具体使用很简单，我不多赘述，给个视频你就大致明白了：​
 
-<div style="text-align: center;">
-  <iframe src="https://player.bilibili.com/player.html?isOutside=true&amp;aid=615163818&amp;bvid=BV1Jh4y1g7PV&amp;cid=1175422578&amp;p=1" 
-          scrolling="no" 
-          border="0" 
-          frameborder="no" 
-          framespacing="0" 
-          allowfullscreen="true"
-          style="width: 100%; max-width: 800px; height: 450px;">
+<div style={{ textAlign: 'center' }}>
+  <iframe 
+    src="https://player.bilibili.com/player.html?isOutside=true&aid=615163818&bvid=BV1Jh4y1g7PV&cid=1175422578&p=1" 
+    scrolling="no" 
+    border="0" 
+    frameBorder="no" 
+    frameSpacing="0" 
+    allowFullScreen={true}
+    style={{ 
+      width: '100%', 
+      maxWidth: '800px', 
+      height: '450px' 
+    }}>
   </iframe>
 </div>
 
