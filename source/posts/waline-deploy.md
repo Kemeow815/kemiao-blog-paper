@@ -42,7 +42,7 @@ keywords: Waline评论部署
 ---
 
 ## HTML 引入 (客户端)
-```html
+```
 <head>
   <link
     rel="stylesheet"
@@ -90,4 +90,4 @@ keywords: Waline评论部署
 ---
 
 ## 以上为部分修改原文
-原文链接: <https://waline.js.org/guide/get-started/>
+原文链接: https://waline.js.org/guide/get-started/
