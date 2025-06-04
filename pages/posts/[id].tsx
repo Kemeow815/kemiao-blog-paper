@@ -162,6 +162,7 @@ export default function Post({ meta, mdxcode, nextPost, prevPost, excerpt, headi
         <PostTitle>{meta.title}</PostTitle>
         <Date>{dateI18n(parseDate(meta.date))}</Date>
         <MetaStyle>
+          {/* 修改点 1 */}
           <div style={{ display: "inline-block", maxWidth: "50%" }}>
             <span className="category">
               <StyledLink href={`/categories/${meta.categories}`} passHref={true}>
@@ -177,10 +178,21 @@ export default function Post({ meta, mdxcode, nextPost, prevPost, excerpt, headi
           {useMdxPost(mdxcode)}
         </MarkdownStyle>
         <section>
-          <div style={{ textAlign: 'right', opacity: .5, fontSize: '0.875rem', margin: "4rem 0 0 0" }}>
+          {/* 修改点 2 */}
+          <div style={{ 
+            textAlign: 'right', 
+            opacity: .5, 
+            fontSize: '0.875rem', 
+            margin: "4rem 0 0 0" 
+          }}>
             更新于 {meta.date}
           </div>
-          <div style={{ textAlign: 'right', opacity: .5, fontSize: '0.875rem' }}>
+          {/* 修改点 3 */}
+          <div style={{ 
+            textAlign: 'right', 
+            opacity: .5, 
+            fontSize: '0.875rem' 
+          }}>
             <Eye size={"1.1em"} style={{ margin: "0 0.2rem", paddingBottom: "0.1em" }} />
             <span className="waline-pageview-count" data-path={router.basePath} />
           </div>
