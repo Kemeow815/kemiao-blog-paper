@@ -1,4 +1,4 @@
-import { Github, Mail, Rss } from "lucide-react"
+import { Github, Mail, Rss, Send, Twitter } from 'lucide-react'
 import Link from "next/link"
 import { useMemo } from "react"
 import styled from "styled-components"
@@ -34,7 +34,7 @@ export default function Sidebar({ isShow, toggle }: Props) {
       <Content style={{ paddingTop: '8rem' }}>
         <h1>
           <span>
-            {"SANSUI'S BLOG"}
+            {"KeMiao'S BLOG"}
           </span>
         </h1>
         <div onClick={handleThemeChange}>
@@ -46,11 +46,13 @@ export default function Sidebar({ isShow, toggle }: Props) {
         <div><OptionText><Link href="/atom.xml">RSS</Link></OptionText></div>
         <LastSection>
           <Icons>
-            <a href={siteInfo.social.github}><Github /></a>
-            <a href={`mailto:${siteInfo.social.email}`}><Mail /></a>
-            <a href="/rss"><Rss /></a>
+          <a href={siteInfo.social.github}><Github /></a>
+          <a href={siteInfo.social.send}><Send /></a>
+          <a href={siteInfo.social.twitter}><Twitter /></a>
+          <a href={`mailto:${siteInfo.social.email}`}><Mail /></a>
+          <a href="/rss"><Rss /></a>
           </Icons>
-          <div style={{ margin: "1rem auto" }}>Sansui 2025<br />All rights reserved</div>
+          <div style={{ margin: "1rem auto" }}>KeMiao 2025<br />All rights reserved</div>
         </LastSection>
       </Content>
       <PositionedClose>

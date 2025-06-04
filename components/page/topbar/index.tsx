@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 import React, { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import styled from "styled-components"
-import Neko from "../../../assets/neko.svg"
+import Kemiao from "../../../assets/kemiao.svg"
 import { throttle } from "../../../lib/throttle"
 import { siteInfo } from "../../../site.config"
 import { dropShadowSoft, hoverRound } from "../../../styles/css"
@@ -94,8 +94,8 @@ export default function Topbar({ placeHolder = true, scrollElem, hideSearch, ...
         <Avatar >
           <Link href="/" passHref={true} style={{ padding: "0 1rem" }}>
             {/*eslint-disable-next-line @next/next/no-img-element*/}
-            <Neko width="36" />
-            <span>{`${siteInfo.author}'s 's blog`}</span>
+            <Kemiao width="36" />
+            <span>{`${siteInfo.author}'s blog`}</span>
           </Link>
         </Avatar>
         <Nav>

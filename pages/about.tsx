@@ -31,45 +31,107 @@ export default function About() {
       <Head>
         <title>{`About ${siteInfo.author}`}</title>
         <CommonHead />
-      </Head>
+        </Head>
       <LayoutContainer hidesearch={true}>
         <Hero className={isBgLoaded ? 'loaded' : ''}>
           <span>{`Hi, I'm ${siteInfo.author}`}</span>
         </Hero>
         <OneColLayout>
-          <AboutDescription>/ 记录一些思考和吐槽 /</AboutDescription>
+          <AboutDescription>/ 关于 克喵爱吃卤面 /</AboutDescription>
           <AnimatedMarkdown>
-            <p>Github: <a href="https://github.com/sansui233">Sansui233</a><br />
-              E-mail：<a href="mailto:sansuilnm@gmail.com">sansuilnm@gmail.com</a></p>
-            <h4>Programing</h4>
-            <p>计算机专业。杂食。目前以前端为主，喜欢用<del>爱</del>懒发电</p>
+            <div style={{ textAlign: 'center', margin: '20px 0' }}>
+              <a href="https://blog-v3.kemeow.top/">
+                <img 
+                  src="https://media.giphy.com/media/SWoSkN6DxTszqIKEqv/giphy.gif" 
+                  alt="GIF Link" 
+                  height="275" 
+                  style={{ maxWidth: '100%', height: 'auto', display: 'inline-block' }}
+                />
+              </a>
+            </div>
+            
             <ul>
-              <li>后端：Java, C++, Golang, Python</li>
-              <li>前端：React, Next.js</li>
+              <li>🔭 I’m currently studying in Nanjing</li>
+              <li>🌱 Current learning content: Automation Technology and Applications, front-end (sub), etc</li>
+              <li>💬 You can ask me some questions about resources。</li>
+              <li>📫 How to contact my email or official account: kemiaofx@163.com</li>
+              <li>🍉 Active Community：
+                <a href="https://blog-v3.kemeow.top">BLOG</a> | 
+                <a href="https://t.me/KemiaoJun">Telegram</a> | 
+                <a href="https://x.com/kemiaosw/">X</a>
+              </li>
             </ul>
-            <h4>Design&amp;Painting</h4>
-            <p>长期做海报。</p>
-            <p>业余画二次元插画类。不太会做角色设计。</p>
-            <h4>Projects</h4>
-            <p>这个博客算一个。其他大多由于各种原因弃坑。比如</p>
+
+            <div style={{ textAlign: 'center', margin: '20px 0' }}>
+              <img 
+                src="https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=300&&section=header&text=HI%20THERE!&fontSize=90&fontAlign=50&fontAlignY=30&desc=I%20AM%20KeMiao%20%F0%9F%91%8B&descAlign=50&descSize=30&descAlignY=60&animation=twinkling" 
+                alt="Capsule Header"
+                style={{ maxWidth: '100%' }}
+              />
+            </div>
+
+            <div style={{ textAlign: 'center', margin: '20px 0' }}>
+              <img 
+                src="https://readme-typing-svg.demolab.com?font=Orbitron&size=25&pause=1000&center=true&vCenter=true&random=false&width=600&lines=Welcome+to+my+About+page!;I+am+KeMiao+obsessed+with+programming!" 
+                alt="Typing SVG"
+                style={{ maxWidth: '100%' }}
+              />
+            </div>
+
+            <h3>👋 个人简介</h3>
+            <hr />
+            <p>
+              <a href="https://kemiao.online">个人主页</a> | 
+              <a href="https://blog-v3.kemeow.top">博客站点</a>
+            </p>
+            <p>大家好！这里是克喵爱吃卤面的博客。致力于分享资源、生活日记和踩坑教程，代码水准一般，自动化专业大二学生，现于南京就读，普通的大学牛马。</p>
+
+            <h3>关于我</h3>
+            <hr />
             <ul>
-              <li><a href="https://github.com/Sansui233/fgomerlin">FGO素材规划工具</a>：是可离线使用的 Web App<br />
-                弃坑原因：不玩了。攒了大半年，抽卡太非，剧情无聊，立绘质量参差不齐</li>
-              <li><a href="https://github.com/Sansui233/fgo-airtest">FGO-Airtest</a>：ios 可用的游戏自动化刷本工具，俗称外挂，但其实是伪物理外挂，挂机模拟手刷。<br />
-                弃坑原因：不玩了。而且后面安卓和 ios 互通了。</li>
-              <li><del>一个最好不要放这里的项目</del></li>
+              <li><strong>个性:</strong> 开朗活泼，热爱学习，勤奋工作</li>
+              <li><strong>技能:</strong> 自动化技术与应用</li>
+              <li><strong>个人信息:</strong>
+                <ul>
+                  <li><strong>姓名:</strong> mcy</li>
+                  <li><strong>学校:</strong> 南京工业职业技术大学，<a href="https://www.niit.edu.cn/">官方网站</a></li>
+                  <li><strong>年级:</strong> 大二</li>
+                  <li><strong>职业:</strong> 学生</li>
+                </ul>
+              </li>
+              <li><strong>兴趣:</strong> 计算机，单机游戏，电子产品，数码产品，资源分享</li>
+              <li><strong>梦想:</strong> 咸鱼算不算？</li>
             </ul>
-            <p>没弃坑的是在自己在用的小东西</p>
+
+            <h3>📈 我的GitHub数据</h3>
+            <div style={{ textAlign: 'center' }}>
+              <img 
+                src="https://github-readme-stats.vercel.app/api?username=Kemeow815" 
+                alt="GitHub Stats" 
+                style={{ maxWidth: '100%' }}
+              />
+            </div>
+
+            <div style={{ textAlign: 'center', margin: '20px 0' }}>
+              <img 
+                src="https://github-readme-activity-graph.vercel.app/graph?username=Kemeow815&theme=github-compact&custom_title=Activity&radius=30&height=300" 
+                alt="Activity Graph"
+                style={{ maxWidth: '100%' }}
+              />
+            </div>
+
+            <div style={{ textAlign: 'center' }}>
+              <img 
+                src="https://github-immortality.vercel.app/api?username=Kemeow815" 
+                alt="修仙系列统计卡片" 
+                style={{ maxWidth: '100%' }} 
+              />
+            </div>
+
+            <h3>赞助</h3>
             <ul>
-              <li><a href="https://github.com/Sansui233/logseq-bonofix-theme">Logseq Bonofix Theme</a>: 一个 Logseq 题，保持简洁但感觉更轻松。<br />
-                最开始是因为 Logseq UI 太丑，明明是笔记工具完全没考虑大纲类的排版需要，拿着tailwind 就往上套，配色层级也一言难尽，强迫症无法忍受。<br />
-                现在的话 Logseq 的设计好多了，不过自己还是喜欢己写的主题的轻松感，少有的双色配色，能够轻松聚焦重点，同时又不会花哨。</li>
-            </ul>
-            <p>小工具狂魔，平时写的自用小工具更多一些，基本是个性化的需求。</p>
-            <h4><a href="#game"></a>Game</h4>
-            <ul>
-              <li>Minecraft</li>
-              <li>塞尔达旷野之息</li>
+              <li>微信公众号：<a href="https://wechat.kemeow.top/">克喵的小站</a></li>
+              <li>赞助页面: <a href="https://donate.kemeow.top/">点我</a></li>
             </ul>
           </AnimatedMarkdown>
         </OneColLayout>
@@ -107,7 +169,6 @@ const Hero = styled.h1`
     }
   }
 
-  /* 图片背景（初始隐藏） */
   &::after {
     content: '';
     position: absolute;
@@ -122,7 +183,6 @@ const Hero = styled.h1`
     z-index: -1;
   }
 
-  /* 加载完成后的样式 */
   &.loaded::before {
     animation: none;
     opacity: 0;

@@ -1,4 +1,4 @@
-import { Github, Mail, Rss } from 'lucide-react'
+import { Github, Mail, Rss, Send, Twitter } from 'lucide-react'
 import styled from 'styled-components'
 import { siteInfo } from '../../site.config'
 
@@ -8,9 +8,11 @@ const Footer = (props: Props) => {
   return (
     <Container {...props}>
       <a href={siteInfo.social.github}><Github /></a>
+      <a href={siteInfo.social.send}><Send /></a>
+      <a href={siteInfo.social.twitter}><Twitter /></a>
       <a href={`mailto:${siteInfo.social.email}`}><Mail /></a>
       <a href="/rss"><Rss /></a>
-      <div>{"Code & Design by Sansui 2025"} <br /> {"All rights reserved"}</div>
+      <div>{"Code & Design by Sansui, this blog is deployed by kemiao 2025"} <br /> {"All rights reserved"}</div>
     </Container>
   )
 }

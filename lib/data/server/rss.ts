@@ -163,14 +163,14 @@ async function createRss() {
   /** File Info */
   const feed = new Feed({
     title: `${siteInfo.author}'s blog`,
-    description: "记录学习和生活的个人博客",
+    description: "克喵的个人博客",
     id: siteInfo.domain,
     link: siteInfo.domain,
     language: "zh-CN", // optional, used only in RSS 2.0, possible values: http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
     // image: `${SiteInfo.domain}/avatar-white.png`,
     favicon: `${siteInfo.domain}/favicon.ico`,
-    copyright: `All rights reserved 2022, ${siteInfo.author}`,
-    // updated: new Date(2013, 6, 14), // optional, default = today
+    copyright: `All rights reserved 2025, ${siteInfo.author}`,
+    updated: new Date(2025, 6, 4), // optional, default = today
     // generator: "awesome", // optional, default = 'Feed for Node.js'
     feedLinks: {
       //   json: "https://example.com/json",
