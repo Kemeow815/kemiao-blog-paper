@@ -2,7 +2,7 @@ export const siteInfo = {
     author: "KeMiao", // 作者名
     social: {
       email: "me@kemiaosw.top", // 邮件
-      github: "https://github.com/Kemeow815.top", // github 链接
+      github: "https://github.com/Kemeow815", // github 链接
       send: "https://t.me/KemiaoJun",
       twitter: "https://twitter.com/kemiaosw", // twitter 链接
     },
