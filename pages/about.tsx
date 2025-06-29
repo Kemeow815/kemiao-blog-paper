@@ -84,7 +84,7 @@ export default function About() {
               <a href="https://kemiao.online">个人主页</a> | 
               <a href="https://blog-v3.kemeow.top">博客站点</a>
             </p>
-            <p>大家好！这里是克喵爱吃卤面的博客。致力于分享资源、生活日记和踩坑教程，代码水准一般，自动化专业大二学生，现于南京就读，普通的大学牛马。</p>
+            <p>大家好！这里是克喵爱吃卤面的博客。致力于分享资源、生活日记和踩坑教程，代码水准一般，自动化专业大学生，现于南京就读，普通的大学牛马。</p>
 
             <h3>关于我</h3>
             <hr />
@@ -95,7 +95,7 @@ export default function About() {
                 <ul>
                   <li><strong>姓名:</strong> mcy</li>
                   <li><strong>学校:</strong> 南京工业职业技术大学，<a href="https://www.niit.edu.cn/">官方网站</a></li>
-                  <li><strong>年级:</strong> 大二</li>
+                  <li><strong>年级:</strong> 大三</li>
                   <li><strong>职业:</strong> 学生</li>
                 </ul>
               </li>
