@@ -86,7 +86,7 @@ tags:
   - blog
   - othetag
 description: 测试 draft 属性
-draft: true
+ 
 keywords: Markdown, 测试
 ---
 

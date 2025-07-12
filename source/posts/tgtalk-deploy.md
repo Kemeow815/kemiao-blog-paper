@@ -1,9 +1,8 @@
 ---
 title: tgtalk免费部署
 description: 一个基于 Cloudflare Workers 的 tg 频道消息说说。
-date: 2025-05-04 23:48:55
+date: "2025-05-04"
 categories: 技术分享
-draft: true
 tags: 
   - tgtalk
   - 说说

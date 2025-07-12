@@ -1,9 +1,8 @@
 ---
 title: Umami博客访问统计Vercel+Cloudflare Workers部署
 description: Umami博客访问统计Vercel+Cloudflare Workers部署。
-date: 2025-04-06 23:25:55
+date: "2025-04-06"
 categories: 技术分享
-draft: true
 tags: 
   - Umami部署
   - 网站统计

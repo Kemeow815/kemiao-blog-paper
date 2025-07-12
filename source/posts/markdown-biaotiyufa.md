@@ -1,9 +1,8 @@
 ---
 title: Markdown-标题语法 | 技术分享
 description: 记录 Markdown 语法的标题语法,方便学习和查找。
-date: 2025-02-12 18:15:34
+date: "2025-02-12"
 categories: 技术分享
-draft: true
 tags: 
   - markdown
   - 速览表

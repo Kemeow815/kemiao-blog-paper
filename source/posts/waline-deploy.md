@@ -1,7 +1,7 @@
 ---
 title: Waline评论在Vercel部署
 description: 使用Waline评论我喜欢使用的部署方法(个人认为最简便)。
-date: 2025-04-14 18:08:55
+date: "2025-04-14"
 categories: 技术分享
 tags: 
   - Waline评论部署

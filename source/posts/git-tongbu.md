@@ -1,9 +1,8 @@
 ---
 title: Git 同步上游仓库的更新
 description: 同步上游仓库的更新，保持本地仓库与远程仓库的一致性。
-date: 2025-04-04 20:13:34
+date: "2025-04-04"
 categories: 技术分享
-draft: true
 tags: 
   - Git教程
 keywords: Git教程, 同步

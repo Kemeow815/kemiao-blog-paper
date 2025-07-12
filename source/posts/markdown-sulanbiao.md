@@ -1,9 +1,8 @@
 ---
 title: Markdown-速查表
 description: 记录 Markdown 的用法，便于查找。
-date: 2025-02-11 18:15:34
+date: "2025-02-11"
 categories: 技术分享
-draft: true
 tags: 
   - markdown
   - 速览表
