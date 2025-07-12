@@ -11,7 +11,7 @@ export function dateToYMDMM(d: Date): string {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
-    timeZone: siteInfo.timeZone ?? 'Asia/Shanghai'
+    timeZone: siteInfo.timezone ?? 'Asia/Shanghai'
   })
 
   const parts = dateFormatter.formatToParts(d);
