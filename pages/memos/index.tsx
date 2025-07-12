@@ -2,12 +2,14 @@ import { HashIcon, MenuSquare, Search, TagIcon, Users, X } from "lucide-react";
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import { useCallback, useContext, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled, { ThemeContext } from "styled-components";
 import { CommonHead } from "..";
 import ButtonFloat from "../../components/common/button-float";
 import { LinkWithLine } from "../../components/common/link-with-line";
+import Modal from "../../components/common/modal";
 import { TwoColLayout } from "../../components/layout";
 import CardCommon from "../../components/memo/cardcommon";
 import CommentCard from "../../components/memo/commentcard";
@@ -24,12 +26,13 @@ import { compileMdxMemo } from "../../lib/markdown/mdx";
 import { SearchObj } from "../../lib/search";
 import { siteInfo } from "../../site.config";
 import { fadeInRight } from "../../styles/animations";
-import { floatMenu } from "../../styles/css";
+import { dropShadow, floatMenu } from "../../styles/css";
 import { Extend } from "../../utils/type-utils";
 
-const ImageBrowser = dynamic(() => import("../../components/memo/imagebrowser"))
-
 export const MemoCSRAPI = '/data/memos'
+
+const ImageBrowser = dynamic(() => import("../../components/memo/imagebrowser"))
+const Waline = dynamic(() => import("../../components/page/waline"))
 
 // TMemo 的 content 是 code……
 export type TMemo = Omit<MemoPost, "content"> & {
@@ -46,74 +49,98 @@ type Props = {
 
 export default function Memos({ source, info, memotags, client }: Props) {
   const theme = useContext(ThemeContext)
+  const router = useRouter()
   const [isMobileSider, setIsMobileSider] = useState(false)
   const [t, i18n] = useTranslation()
-  const isModel = useImageBroswerStore(state => state.isModel)
+  const isImageModal = useImageBroswerStore(state => state.isModal)
+  const [isCommentModal, setIsCommentModal] = useState(false)
   const [postsData, setpostsData] = useState(source)
   const [postsDataBackup, setpostsDataBackup] = useState(source)
-
 
 
   // search engine init
   // TODO set page limitation
   const inputRef = useRef<HTMLInputElement>(null)
-  const { searchStatus, resetSearchStatus, setTextAndSearch: setSearchText, search, initSearch } = useSearch<TMemo>({
-    inputRef,
-    setRes: setpostsData,
-    initData: async () => {   // fetch data and set search engine
-      const urls = Array.from({ length: info.pages + 1 }, (_, i) => `${MemoCSRAPI}/${i}.json`)
-      const requests = urls.map(url => fetch(url).then(res => res.json()));
-      const resp = await Promise.all(requests)
-      const src = (resp as MemoPost[][]).flatMap(v => v)
-      const searchObj: SearchObj[] = src.map(memo => ({
-        id: memo.id,
-        title: "", // 无效化 title。engine 动态构建结果写起来太麻烦了，以后再说。
-        content: memo.content,
-        tags: memo.tags,
-      }))
+  const initData: Awaited<Parameters<typeof useSearch<TMemo>>[0]["initData"]> = useCallback(async () => {   // fetch data and set search engine
+    const urls = Array.from({ length: info.pages + 1 }, (_, i) => `${MemoCSRAPI}/${i}.json`)
+    const requests = urls.map(url => fetch(url).then(res => res.json()));
+    const resp = await Promise.all(requests)
+    const src = (resp as MemoPost[][]).flatMap(v => v)
+    const searchObj: SearchObj[] = src.map(memo => ({
+      id: memo.id,
+      title: "", // 无效化 title。engine 动态构建结果写起来太麻烦了，以后再说。
+      content: memo.content,
+      tags: memo.tags,
+    }))
 
-      return {
-        searchObj,
-        filterRes: (searchres) => {
-          const ids = searchres.map(r => r.id)
-          const tmemos: Promise<TMemo>[] = src.filter(memo => {
-            if (ids.includes(memo.id)) {
-              return true
-            }
-            return false
-          }).map(async memo => {
-            return {
-              ...memo,
-              code: (await compileMdxMemo(memo.content)).code,
-              length: memo.content.length
-            }
-          })
-          return tmemos
-        }
+    return {
+      searchObj,
+      filterRes: (searchres) => {
+        const ids = searchres.map(r => r.id)
+        const tmemos: Promise<TMemo>[] = src.filter(memo => {
+          if (ids.includes(memo.id)) {
+            return true
+          }
+          return false
+        }).map(async memo => {
+          return {
+            ...memo,
+            code: (await compileMdxMemo(memo.content)).code,
+            length: memo.content.length
+          }
+        })
+        return tmemos
       }
     }
+  }, [info.pages])
+
+  const { searchStatus, resetSearchStatus, setTextAndSearch, search, initSearch } = useSearch<TMemo>({
+    inputRef,
+    setRes: setpostsData,
+    initData
   })
 
   // 包装 handle search，空值输入不触发搜索，恢复数据
-  const searchBehavior = useCallback(() => {
-    if (inputRef.current && inputRef.current.value === "") {
+  const handleClickSearchBtn = useCallback(() => {
+    if (inputRef.current && inputRef.current.value === "" && searchStatus.isSearch === "done") {
       setpostsData(postsDataBackup)
       resetSearchStatus()
       return
     }
-    search()
-  }, [search, postsDataBackup, resetSearchStatus]) //TODO
+    search() // search according to the text in input ref
+  }, [search, postsDataBackup, searchStatus, resetSearchStatus])
+
+  // search according to url query
+  const { tag } = router.query
+  useEffect(() => {
+    console.debug("%% useEffectsetsearch")
+    if (tag && inputRef.current && inputRef.current.value !== tag) {
+      setTextAndSearch("#" + decodeURIComponent(tag as string))
+    } else if (!tag) {
+      setTextAndSearch("", false)
+      setpostsData(postsDataBackup)
+      resetSearchStatus()
+    }
+  }, [tag, resetSearchStatus, setTextAndSearch, setpostsData, postsDataBackup])
+
 
   // bind keyboard event
   useDocumentEvent(
     "keydown",
     (evt) => {
       if (inputRef.current && inputRef.current === document.activeElement && evt.key === "Enter")
-        searchBehavior()
+        handleClickSearchBtn()
     },
     undefined,
     [search]
   )
+
+  const handleClickTag = useCallback((t: MemoTag) => {
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, tag: encodeURIComponent(t.name) },
+    }, undefined, { shallow: true })
+  }, [router])
 
   return (
     <>
@@ -143,7 +170,7 @@ export default function Memos({ source, info, memotags, client }: Props) {
               <MemoCol
                 postsData={postsData} postsDataBackup={postsDataBackup}
                 setpostsData={setpostsData} setpostsDataBackup={setpostsDataBackup}
-                client={client} searchStatus={searchStatus} resetSearchStatus={resetSearchStatus} setTextAndSearch={setSearchText}
+                client={client} searchStatus={searchStatus} resetSearchStatus={resetSearchStatus} setTextAndSearch={setTextAndSearch}
               />
             </Col>
             <SiderContent $isMobileSider={isMobileSider}>
@@ -156,7 +183,7 @@ export default function Memos({ source, info, memotags, client }: Props) {
                     () => { initSearch() }
                   } />
                 <Search className="hover-gold" size={"1.4rem"}
-                  onClick={searchBehavior}
+                  onClick={handleClickSearchBtn}
                 />
               </MemoSearchBox>
               <NavCard info={info} />
@@ -167,7 +194,7 @@ export default function Memos({ source, info, memotags, client }: Props) {
                 {memotags.map(t => {
                   return <span className="hover-gold" style={{ display: "inline-block", paddingRight: "0.75em" }}
                     key={t.name}
-                    onClick={() => { setSearchText("#" + t.name) }}
+                    onClick={() => handleClickTag(t)}
                   >
                     <HashIcon size={"1rem"} style={{ opacity: 0.5, paddingRight: "1px" }} />
                     {`${t.name}`}
@@ -184,11 +211,23 @@ export default function Memos({ source, info, memotags, client }: Props) {
                   {siteInfo.friends.map((f, i) => <div key={i}><LinkWithLine href={f.link}>{f.name}</LinkWithLine></div>)}
                 </CardCommon>
               }
-              {siteInfo.walineApi && siteInfo.walineApi !== "" && <CommentCard />}
+              {siteInfo.walineApi && siteInfo.walineApi !== "" && <CommentCard setIsCommentModal={setIsCommentModal} />}
             </SiderContent>
           </TwoColLayout>
         </OneColLayout>
-        {isModel && <ImageBrowser />}
+        {isImageModal && <ImageBrowser />}
+        {siteInfo.walineApi && siteInfo.walineApi !== "" &&
+          <Modal
+            isModal={isCommentModal}
+            setModal={setIsCommentModal}
+            style={{ background: "transparent" }}
+            isAnimated={true}
+            showCloseBtn={true}>
+            <CommentContainer>
+              <Waline onClick={e => e.stopPropagation()} />
+            </CommentContainer>
+          </Modal>
+        }
       </main>
     </>
   )
@@ -249,7 +288,7 @@ align-self: flex-end;
 }
 
 @media screen and (min-width: 1080px) {
-  max-width: 640px;
+  max-width: 680px;
 }
 
 
@@ -379,5 +418,30 @@ const MemoSearchBox = styled.div`
     flex: 0  0 auto;
     margin: 0 0.6rem 0 0.5rem;
     color: ${p => p.theme.colors.uiLineGray};
+  }
+`
+
+const CommentContainer = styled.div`
+  height:100%;
+  width: 100%;
+  overflow-y: auto;
+  max-width: 780px;
+  margin: 0 auto;
+  background: ${p => p.theme.colors.bg};
+
+  padding-top: 2rem; /* avoid close bar conflict */
+  padding-bottom: 2rem; /* avoid close bar conflict */
+
+  ${dropShadow}
+
+  &>div{
+    max-width: min(90%, 780px);
+    cursor: default;
+  }
+
+  @media screen and (min-width: 780px) {
+    height: 96vh;
+    margin-top: 2vh;
+    border-radius: 0.5rem;
   }
 `
